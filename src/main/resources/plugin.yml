@@ -1,0 +1,14 @@
+name: ShareIdea
+version: '${project.version}'
+main: me.amineos.shareidea.ShareIdea
+api-version: 1.19
+commands:
+  example:
+    description: This is an example command.
+    usage: /example
+  reload:
+      description: Reload The Config.
+      usage: /reload
+  help:
+    description: Shows a list of all commands
+    usage: /help

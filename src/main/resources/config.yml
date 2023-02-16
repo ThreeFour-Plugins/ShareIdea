@@ -1,0 +1,12 @@
+# Example config.yml file
+
+# A message to be displayed to players when they join the server
+welcome-message: "Welcome to the server!"
+
+# A list of banned words
+banned-words:
+  - "badword1"
+  - "badword2"
+
+# A numerical value representing the amount of time a player is banned for
+ban-duration: 3600
