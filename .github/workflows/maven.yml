@@ -27,10 +27,29 @@ jobs:
     - name: Build with Maven
       run: mvn package
 
+    - name: Create GitHub release
+      id: create_release
+      uses: actions/create-release@v1.0.0
+      with:
+        tag_name: v1.0
+        release_name: Release 1.0
+        body: This Is The First Release
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Get the upload URL
+      id: get_upload_url
+      run: echo "::set-output name=upload_url::$(jq -r '.upload_url' ${{ steps.create_release.outputs.release }})"
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Upload artifact to GitHub Releases
       uses: actions/upload-release-asset@v1
       with:
-        upload_url: ${{ env.upload_url }}
+        upload_url: ${{ steps.get_upload_url.outputs.upload_url }}
         asset_path: target/ShareIdea-1.0-SNAPSHOT.jar
         asset_name: ShareIdea-1.0-SNAPSHOT.jar
         asset_content_type: application/java-archive
